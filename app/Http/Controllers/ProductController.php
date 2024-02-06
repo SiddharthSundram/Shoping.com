@@ -21,8 +21,8 @@ class ProductController extends Controller
         if($req->isMethod('post')) {
             $data = $req->validate([
                 'title' => 'required',
-                'price' => 'required',
-                'discount_price' => 'required',
+                'price' => 'required|numeric',
+                'discount_price' => 'required|numeric',
                 'description' => 'required',
                 'image' => 'required',
                 'department_id' => 'required',

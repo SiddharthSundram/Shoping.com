@@ -33,55 +33,62 @@ class OrderController extends Controller
     }
     
     public function myOrder(){
-        $data['order'] =  Order::where([["status",true],["user_id",Auth::id()]])->first();
-        return view('home.myOrder',$data);
+        $data['orders'] =  Order::where([["status",true],["user_id",Auth::id()]])->get();
+        return view('home.myOrder', $data);
     }
+    
   
-
-    public function addToCart(Request $request , $id){
+    public function addToCart(Request $request, $id)
+    {
         $product = Product::find($id);
-        
         $user = Auth::user();
-
-        if($product){
-            $order = Order::where([["status",false],["user_id",$user->id]])->first();
-
-            if($order){
-                $orderItem = OrderItem::where("status",false)->where('product_id',$id)->where("order_id" , $order->id)->first();
-                if($orderItem){
-                    // if orderItem alredy in cart
+    
+        if ($product) {
+            $order = Order::where([
+                ["status", false],
+                ["user_id", $user->id]
+            ])->first();
+    
+            if ($order) {
+                $orderItem = OrderItem::where("status", false)
+                    ->where('product_id', $id)
+                    ->where("order_id", $order->id)
+                    ->first();
+    
+                if ($orderItem) {
+                    // If orderItem already in cart
                     $orderItem->qty += 1;
                     $orderItem->save();
-                }
-                else{
+                } else {
                     $oi = new OrderItem();
                     $oi->status = false;
                     $oi->product_id = $id;
                     $oi->order_id = $order->id;
                     $oi->save();
                 }
-            }
-            else{
-                // if order not exist in cart
+            } else {
+                // If order does not exist in cart
                 $o = new Order();
                 $o->user_id = $user->id;
                 $o->status = false;
                 $o->save();
-
-                
+    
+                // Refresh the order to get the updated id
+                $order = $o->fresh();
+    
                 $oi = new OrderItem();
                 $oi->status = false;
                 $oi->product_id = $id;
-                $oi->order_id = $o->id;
+                $oi->order_id = $order->id;
                 $oi->save();
             }
-            return redirect()->route("cart")->with("success","product added or updated sucesfully");
+    
+            return redirect()->route("cart")->with("success", "Product added or updated successfully");
+        } else {
+            return redirect()->route("home")->with("error", "Product not found");
         }
-        else{
-            return redirect()->route("home")->with("error" , "Product not found");
-        }
-        
-    } 
+    }
+    
    
    
     public function cart(){
