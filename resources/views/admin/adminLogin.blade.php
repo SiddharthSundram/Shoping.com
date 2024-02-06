@@ -9,7 +9,7 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-        
+
 
 
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
@@ -29,8 +29,9 @@
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
                 aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-                More
+                <span class="navbar-toggler-icon"></span>
             </button>
+
 
             <div class="collapse navbar-collapse" id="navbarScroll">
                 <ul class="navbar-nav  ms-auto navbar-nav-scroll" style="--bs-scroll-height: 100px;">
@@ -43,30 +44,30 @@
 
         </div>
     </nav>
-
-
     <div class="container mt-5">
         <div class="row">
-            <div class="col-4 mx-auto">
+            <div class="col-lg-4 col-md-6 col-sm-8 mx-auto">
                 <div class="card">
                     <div class="card-header">
                         <h3 class="h4 text-center">Admin Login</h3>
                     </div>
                     <div class="card-body">
-                        <form action="{{route('adminlogin')}}" method="POST">
+                        <form action="{{ route('adminlogin') }}" method="POST">
                             @csrf
                             <div class="mb-3">
-                                <label for="">Email</label>
-                                <input type="email" name="email" placeholder="Enter email" value="{{old('email')}}" class="form-control">
+                                <label for="email">Email</label>
+                                <input type="email" name="email" id="email" placeholder="Enter email"
+                                    value="{{ old('email') }}" class="form-control">
                                 @error('email')
-                                    <p class="text-danger small">{{$message}}</p>
+                                    <p class="text-danger small">{{ $message }}</p>
                                 @enderror
                             </div>
                             <div class="mb-3">
-                                <label for="">Password</label>
-                                <input type="password" name="password" placeholder="Enter password" value="{{old('password')}}" class="form-control">
+                                <label for="password">Password</label>
+                                <input type="password" name="password" id="password" placeholder="Enter password"
+                                    value="{{ old('password') }}" class="form-control">
                                 @error('password')
-                                    <p class="text-danger small">{{$message}}</p>
+                                    <p class="text-danger small">{{ $message }}</p>
                                 @enderror
                             </div>
                             <div class="mb-3">
@@ -83,11 +84,12 @@
 
 
 
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
     </script>
 
-    
+
 
     <script>
         toastr.options = {

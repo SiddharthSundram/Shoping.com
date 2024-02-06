@@ -1,7 +1,7 @@
 @extends('home.base')
 
 @section('content')
-{{-- 
+    {{-- 
     <nav class="navbar navbar-expand-lg sticky-top  bg-body-tertiary">
         <div class="container">
             <a class="navbar-brand text-primary fw-bold" href="{{ route('home.home') }}">{{ env('APP_NAME') }}</a>
@@ -79,16 +79,15 @@
             <div class="col d-flex gap-4">
 
                 @foreach ($heads as $hed)
-                    
-            
                     <div class="dropdown">
-                        <a class="btn btn-light dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        {{$hed->head_title}}
+                        <a class="btn btn-light dropdown-toggle" href="" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            {{ $hed->head_title }}
                         </a>
                         <ul class="dropdown-menu">
                             @foreach ($departments as $dip)
                                 @if ($hed->id == $dip->head_id)
-                                    <li>    <a class="dropdown-item" href="" >{{ $dip->dep_title }}</a></li>
+                                    <li> <a class="dropdown-item" href="">{{ $dip->dep_title }}</a></li>
                                 @endif
                             @endforeach
                         </ul>
@@ -97,7 +96,7 @@
 
             </div>
         </div>
-    </div>     
+    </div>
 
     <h1></h1>
     <div class="contaienr mt-5">
@@ -118,7 +117,7 @@
             <div class="carousel-inner">
                 @foreach ($products as $item)
                     @if ($item->isAds == '1')
-                       <a href="{{route('home.viewProduct',$item->id)}}">
+                        <a href="{{ route('home.viewProduct', $item->id) }}">
                             <div class="carousel-item  active">
                                 <img src="{{ asset('storage/' . $item->image) }}" height="350px" class="d-block w-100"
                                     alt="...">
@@ -127,7 +126,7 @@
                                         <p class="text-dark">Some representative placeholder content for the first slide.</p> --}}
                                 </div>
                             </div>
-                       </a>
+                        </a>
                     @endif
                 @endforeach
 
@@ -170,7 +169,7 @@
             @foreach ($products as $pro)
                 @if ($pro->isAds == '0' && '2')
                     <div class="col-3 mt-3 ">
-                        <a href="{{ route('home.viewProduct',$pro->id) }}" class="text-decoration-none">
+                        <a href="{{ route('home.viewProduct', $pro->id) }}" class="text-decoration-none">
 
                             <div class="card bordered border-0 ">
                                 <div class="card-body">
@@ -187,7 +186,7 @@
                                     @endforeach
                                     <p class="small text-truncate">{{ $pro->description }}</p>
 
-                                        {{-- <div class="d-flex ">
+                                    {{-- <div class="d-flex ">
                                         <a href="" class="btn btn-success  float-start"><i class="bi bi-lightning-fill"></i> View </a>
                                         <a href="" class="btn btn-warning text-light rounded-0 ms-auto float-end"><i class="bi bi-cart-plus-fill"> </i> Add to Cart</a> </div> --}}
                                 </div>
@@ -204,7 +203,7 @@
     <div class="container-fluid text-light bg-dark mt-5">
         <div class="row">
             <div class="col text-center">
-                <h3 class="h5 mt-1">Created By : Siddharth</h3>
+                <h3 class="h5 mt-1">Created By : Rishav</h3>
             </div>
         </div>
     </div>

@@ -17,19 +17,29 @@
         .cardup:hover {
             transform: scale(1.1);
         }
+
+        .gayab {
+            display: none;
+        }
+
+        @media(max-width:992px) {
+
+            .gayab {
+                display: block;
+            }
+        }
     </style>
 </head>
 
-<body style="background-color:rgb(236, 236, 236)">
-
-    <nav class="navbar navbar-expand-lg sticky-top  bg-body-tertiary">
+<body style="background-color:rgb(199, 199, 199)">
+    <nav class="navbar mb-3 navbar-expand-lg sticky-top  bg-body-tertiary">
         <div class="container">
             <a class="navbar-brand text-primary fw-bold" href="{{ route('home.home') }}">{{ env('APP_NAME') }}</a>
 
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
                 aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-                More <span class="navbar-toggler-icon small"></span>
+                <span class="navbar-toggler-icon small"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarScroll">
@@ -53,13 +63,13 @@
                             <a class="nav-link text-capitalise " aria-current="page"
                                 href="">{{ auth()->user()->name }}</a>
                         </li>
-                        
+
                         <li class="nav-item">
-                            <a class="nav-link " aria-current="page" href="{{route('cart')}}">Cart</a>
+                            <a class="nav-link " aria-current="page" href="{{ route('cart') }}">Cart</a>
                         </li>
-                        
+
                         <li class="nav-item">
-                            <a class="nav-link " aria-current="page" href="{{route('myorder')}}">My Order</a>
+                            <a class="nav-link " aria-current="page" href="{{ route('myorder') }}">My Order</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link " aria-current="page" href="{{ route('logout') }}">Logout</a>
@@ -102,29 +112,44 @@
             </div>
         </div>
     </nav>
+    <div class="container">
+        <nav class="navbar navbar-expand-lg  navbar-light bg-light">
+            <a class="navbar-brand gayab" href="">Category</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+                aria-controls="offcanvasNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-    <div class="container mt-4 bg-light">
-        <div class="row">
-            <div class="col d-flex gap-4">
+            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar"
+                aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Category</h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                        aria-label="Close"></button>
+                </div>
 
-                @foreach ($heads as $hed)
-                    <div class="dropdown">
-                        <a class="btn btn-light dropdown-toggle" href="{{ route('home.viewHead', $hed->id) }}" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            {{ $hed->head_title }}
-                        </a>
-                        <ul class="dropdown-menu">
-                            @foreach ($departments as $dip)
-                                @if ($hed->id == $dip->head_id)
-                                    <li> <a class="dropdown-item" href="{{ route('home.ViewDep', $dip->id) }}">{{ $dip->dep_title }}</a></li>
-                                @endif
-                            @endforeach
-                        </ul>
-                    </div>
-                @endforeach
-
+                <div class="offcanvas-body">
+                    <!-- Your navigation content goes here -->
+                    @foreach ($heads as $hed)
+                        <div class="dropdown">
+                            <a class="btn btn-light dropdown-toggle" href="{{ route('home.viewHead', $hed->id) }}"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ $hed->head_title }}
+                            </a>
+                            <ul class="dropdown-menu">
+                                @foreach ($departments as $dip)
+                                    @if ($hed->id == $dip->head_id)
+                                        <li> <a class="dropdown-item"
+                                                href="{{ route('home.ViewDep', $dip->id) }}">{{ $dip->dep_title }}</a>
+                                        </li>
+                                    @endif
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endforeach
+                </div>
             </div>
-        </div>
+        </nav>
     </div>
 
     <div class="contaienr mt-5">
@@ -158,7 +183,7 @@
                     @endif
                 @endforeach
 
-                {{-- 
+                {{--                 
                 <div class="carousel-item">
                     <img src="https://picsum.photos/300" height="500px" class="d-block w-100" alt="...">
                     <div class="carousel-caption d-none d-md-block">
@@ -201,63 +226,6 @@
     </div>
 
 
-    <div class="container">
-        @foreach ($heads as $hd)
-            <div class="container my-5">
-                <div class="row">
-                    <div class="col-12">
-                        <a href="{{ route('home.viewHead', $hd->id) }}"
-                            class="text-capitalise h4 text-decoration-none">{{ $hd->head_title }}</a>
-                    </div>
-                </div>
-                <div class="row">
-                    @foreach ($hd->departments as $dep)
-                        @foreach ($dep->products as $pro)
-                            @if ($pro->isAds == '0' && '2')
-                                <div class="col-3  mt-3 ">
-                                    <a href="{{ route('home.viewProduct', $pro->id) }}" class="text-decoration-none">
-
-                                        <div class="card cardup bordered border-0 ">
-                                            <div class="card-body">
-                                                <img src="{{ asset('storage/' . $pro->image) }}" height="250px"
-                                                    alt="" class="card-img coolimg">
-                                                <span>
-                                                    <h4 class="h5 text-truncate mt-2">{{ $pro->title }}</h4>
-                                                    @foreach ($departments as $dep)
-                                                        @if ($pro->department_id == $dep->id)
-                                                            <span
-                                                                class="badge bg-success float-end">{{ $dep->dep_title }}</span>
-                                                        @endif
-                                                    @endforeach
-                                                </span>
-                                                <h4 class="h6 text-success">Rs.{{ $pro->discount_price }}/- <del
-                                                        class="text-muted small">Rs.{{ $pro->price }}/-</del></h4>
-
-                                                <p class="small text-truncate">{{ $pro->description }}</p>
-
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            @endif
-                        @endforeach
-                    @endforeach
-
-                </div>
-            </div>
-        @endforeach
-
-    </div>
-
-
-
-    <div class="container-fluid text-light bg-dark mt-5">
-        <div class="row">
-            <div class="col text-center">
-                <h3 class="h5 mt-1">Created By : Siddharth</h3>
-            </div>
-        </div>
-    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
@@ -265,6 +233,45 @@
 </body>
 
 </html>
-
-
-
+<div class="container">
+    @foreach ($heads as $hd)
+        <div class="container my-5">
+            <div class="row">
+                <div class="col-12">
+                    <a href="{{ route('home.viewHead', $hd->id) }}"
+                        class="text-capitalise h4 text-decoration-none">{{ $hd->head_title }}</a>
+                </div>
+            </div>
+            <div class="row flex-nowrap overflow-auto">
+                @foreach ($hd->departments as $dep)
+                    @foreach ($dep->products as $pro)
+                        @if ($pro->isAds == '0' && '2')
+                            <div class="col-6 col-md-4 col-lg-3">
+                                <a href="{{ route('home.viewProduct', $pro->id) }}" class="text-decoration-none">
+                                    <div class="card cardup bordered border-0">
+                                        <div class="card-body">
+                                            <img src="{{ asset('storage/' . $pro->image) }}" height="250px"
+                                                alt="" class="card-img coolimg">
+                                            <span>
+                                                <h4 class="h5 text-truncate mt-2">{{ $pro->title }}</h4>
+                                                @foreach ($departments as $dep)
+                                                    @if ($pro->department_id == $dep->id)
+                                                        <span
+                                                            class="badge bg-success float-end">{{ $dep->dep_title }}</span>
+                                                    @endif
+                                                @endforeach
+                                            </span>
+                                            <h4 class="h6 text-success">Rs.{{ $pro->discount_price }}/- <del
+                                                    class="text-muted small">Rs.{{ $pro->price }}/-</del></h4>
+                                            <p class="small text-truncate">{{ $pro->description }}</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        @endif
+                    @endforeach
+                @endforeach
+            </div>
+        </div>
+    @endforeach
+</div>

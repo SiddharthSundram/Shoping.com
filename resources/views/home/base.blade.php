@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet" />
 
@@ -40,7 +40,6 @@
             <div class="collapse navbar-collapse" id="navbarScroll">
 
                 @if (route('login') && route('signup'))
-                    
                 @else
                     <form class="d-flex mx-auto w-50" role="search">
                         <input class="form-control rounded-0 bordered border-primary" name="search" type="search"
@@ -51,48 +50,49 @@
 
 
                 <ul class="navbar-nav  ms-auto navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-                    
-                    
+
+
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{{ route('home.home') }}">Home</a>
                     </li>
 
                     @auth
                         <li class="nav-item">
-                            <a class="nav-link text-capitalize" aria-current="page" href="">{{auth()->user()->name}}</a>
+                            <a class="nav-link text-capitalize" aria-current="page"
+                                href="">{{ auth()->user()->name }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link " aria-current="page" href="{{route('cart')}}">Cart</a>
+                            <a class="nav-link " aria-current="page" href="{{ route('cart') }}">Cart</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link " aria-current="page" href="{{route('myorder')}}">My Order</a>
+                            <a class="nav-link " aria-current="page" href="{{ route('myorder') }}">My Order</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link " aria-current="page" href="{{route('logout')}}">Logout</a>
+                            <a class="nav-link " aria-current="page" href="{{ route('logout') }}">Logout</a>
                         </li>
                     @endauth
 
-                    
+
                     @guest
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('login')}}">Login</a>
+                            <a class="nav-link" href="{{ route('login') }}">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link " href="{{route('signup')}}">Create an account</a>
+                            <a class="nav-link " href="{{ route('signup') }}">Create an account</a>
                         </li>
                     @endguest
-                    
-                    
-                    
+
+
+
 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">Help
                         </a>
-                    
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href=""> <i class="bi bi-headset"></i> 24x7 customer
-                            care</a></li>
+
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href=""> <i class="bi bi-headset"></i> 24x7 customer
+                                    care</a></li>
                             <li><a class="dropdown-item" href=""><i class="bi bi-badge-ad"></i> Advertisement</a>
                             </li>
                             <li>
@@ -107,13 +107,13 @@
             </div>
         </div>
     </nav>
-    
+
 
 
     @section('content')
-        
+
     @show
-  
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">

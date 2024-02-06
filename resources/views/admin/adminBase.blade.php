@@ -9,7 +9,7 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-        
+
 
 
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
@@ -29,13 +29,14 @@
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
                 aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-                More
+                <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarScroll">
                 <ul class="navbar-nav  ms-auto navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                     <li class="nav-item">
-                        <a class=" btn btn-outline-danger " aria-current="page" href="{{route('adminlogout')}}">Logout</a>
+                        <a class=" btn btn-outline-danger " aria-current="page"
+                            href="{{ route('adminlogout') }}">Logout</a>
                     </li>
 
                 </ul>
@@ -44,64 +45,52 @@
         </div>
     </nav>
 
-    <nav class="navbar navbar-expand-lg small  navbar-dark bg-secondary ">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
         <div class="container">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScrolls"
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarScrolls"
                 aria-controls="navbarScrolls" aria-expanded="false" aria-label="Toggle navigation">
-                Pages <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
             </button>
-
-            <div class="collapse navbar-collapse" id="navbarScrolls">
-                <ul class="navbar-nav navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-
-                    <li class="nav-item">
-                        <a class="nav-link text-dark fw-bold" href="{{ route('admin.dashboard') }}">Dashboard</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link text-dark fw-bold " aria-current="page"
-                            href="{{ route('admin.manageHead') }}">Manage
-                            Head</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link text-dark fw-bold " aria-current="page"
-                            href="{{ route('admin.manageDepartment') }}">Manage Departments</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link text-dark fw-bold " aria-current="page"
-                            href="{{ route('admin.product.index') }}">Manage Products</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link text-dark fw-bold " aria-current="page"
-                            href="{{ route('admin.product.insert') }}">Insert Products</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link text-dark fw-bold " aria-current="page"
-                            href="{{ route('admin.cart.index') }}">Manage Carts</a>
-                    </li>
-                </ul>
+    
+            <div class="offcanvas offcanvas-start" tabindex="-1" id="navbarScrolls" aria-labelledby="offcanvasScrollingLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasScrollingLabel"> Admin Menu Bar
+                        </h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                        aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark fw-bold" href="{{ route('admin.dashboard') }}">Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark fw-bold" href="{{ route('admin.manageHead') }}">Manage Head</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark fw-bold" href="{{ route('admin.manageDepartment') }}">Manage Departments</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark fw-bold" href="{{ route('admin.product.index') }}">Manage Products</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark fw-bold" href="{{ route('admin.product.insert') }}">Insert Products</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark fw-bold" href="{{ route('admin.cart.index') }}">Manage Carts</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-
         </div>
     </nav>
-
-
-
+    
     @section('content')
 
     @show
-
-
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
     </script>
-
-    
 
     <script>
         toastr.options = {
